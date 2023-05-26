@@ -2,7 +2,7 @@
 #include <string>
 
 using namespace std;
-const int tam_arreglo = 10;
+const int tam_arreglo = 1000;
 typedef int tArreglo[tam_arreglo];
 tArreglo arreglo_hungaro;
 void mostrar_arreglo()
@@ -20,6 +20,7 @@ void dance(int a, int b)
     arreglo_hungaro[b] = aux;
 }
 void cargar_arreglo(){
+/*
     arreglo_hungaro[0] = 3;
     arreglo_hungaro[1] = 0;
     arreglo_hungaro[2] = 1;
@@ -30,6 +31,12 @@ void cargar_arreglo(){
     arreglo_hungaro[7] = 4;
     arreglo_hungaro[8] = 6;
     arreglo_hungaro[9] = 9;
+    */
+    for(int i= 0; i<tam_arreglo; i++)
+     {
+        arreglo_hungaro[i]=tam_arreglo-1 - i;
+     }
+     
 }
 int main()
 {
@@ -39,20 +46,22 @@ int main()
     cout << "Entrada>> ";
     mostrar_arreglo();
     cout << endl;
-    bool ordenado = false;
-    while (!ordenado)
+    bool cambio = true;
+    int tam_busqueda = tam_arreglo;
+    while (cambio)
     {
-        ordenado = true;
+        cambio = false;
         int puntero = 0;
         int puntero_sig = 1;
-        while (puntero_sig < tam_arreglo)
+        while (puntero_sig < tam_busqueda)
         {
+            
             int a = arreglo_hungaro[puntero];
             int b = arreglo_hungaro[puntero_sig];
             if (a > b)
             {
                 dance(puntero, puntero_sig);
-                ordenado = false; // aca
+                cambio = true;
             }
             puntero++;
             puntero_sig++;
@@ -60,6 +69,7 @@ int main()
         cant_vueltas++;
         cout << cant_vueltas << ". ";
         mostrar_arreglo();
+        tam_busqueda--;
     }
     cout << endl;
     cout << "Salida>> ";
